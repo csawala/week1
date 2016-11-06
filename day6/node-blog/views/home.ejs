@@ -31,9 +31,9 @@
       <div class="col-lg-12">
         <div class="list-group">
           <!-- loop over blog posts and render them -->
-          <% post.forEach((post) => { %>
+          <% posts.forEach((post) => { %>
             <a href="/post/<%= post.id %>" class="list-group-item">
-              <h4 class="lsit-group-item-heading"><%= post.title %></h4>
+              <h4 class="list-group-item-heading"><%= post.title %></h4>
               <p class="list-group-item-text"><%= post.author %></p>
             </a>
           <% }) %>

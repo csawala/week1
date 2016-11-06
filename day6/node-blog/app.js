@@ -1,4 +1,5 @@
 /* app.js */
+/* to see page go to: ====> http://localhost:8080/ <===== */
 
 // require and instantiate express
 const app = require('express')()
