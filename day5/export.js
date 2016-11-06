@@ -1,4 +1,4 @@
-module.exports = {
+module.export = {
   what: "Huh?",
   runFunc: outWhat
 };
