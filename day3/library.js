@@ -27,9 +27,7 @@ var library = {
 // to Refactor later to reduce code...
 // consider taking parameters for tracks vs. playlists
 function addToPrint (key, content) {
-  // console.log(key);
   var output = [];
-  var list;
 
   if (key.id.includes('t')){
     output.push(key.id + ": "
@@ -43,18 +41,7 @@ function addToPrint (key, content) {
       + key.tracks.length +  " tracks");
   }
 
-  // originally using content as only parameter
-  // for (var key in content){
-  //   // output[key] = content[key];
-  //   for (var value in content[key]) {
-  //     if(value.hasOwnProperty) {
-  //       // console.log(content[key][value]);
-  //       output[key] += content[key][value];
-  //     }
-  //   }
-  // }
   return output;
-  // console.log(output);
 }
 // addToPrint('p01');
 
@@ -93,7 +80,7 @@ var printTracks = function () {
     console.log(output[i].toString());
   });
 }
-printTracks();
+
 
 // prints a list of tracks for a given playlist, in the form:
 // p01: Coding Music - 2 tracks
@@ -102,13 +89,14 @@ printTracks();
 
 var printPlaylist = function (playlistId) {
   var tracks = library.playlists[playlistId].tracks;
-  var output = [];
-  // console.log(tracks);
 
-
+  // print associated playlist
+  console.log(addToPrint(library.playlists[playlistId]).toString());
+  // print tracks listed within playlist
+  tracks.forEach(function(key,i){
+    console.log(addToPrint(library.tracks[key]).toString());
+  });
 }
-
-// printPlaylist('p01');
 
 
 // adds an existing track to an existing playlist
