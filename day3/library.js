@@ -27,12 +27,20 @@ var library = {
 // to Refactor later to reduce code...
 // consider taking parameters for tracks vs. playlists
 function addToPrint (key, content) {
-  // console.log(content);
+  // console.log(key);
   var output = [];
+  var list;
 
-  if (key.includes('t')){
+  if (key.id.includes('t')){
+    output.push(key.id + ": "
+      + key.name + " by "
+      + key.artist
+      + " (" + key.album + ")");
   }
-  if (key.includes('p')){
+  if (key.id.includes('p')){
+    output.push(key.id + ": "
+      + key.name + " - "
+      + key.tracks.length +  " tracks");
   }
 
   // originally using content as only parameter
@@ -45,10 +53,11 @@ function addToPrint (key, content) {
   //     }
   //   }
   // }
-  // return output;
+  return output;
   // console.log(output);
 }
-addToPrint()
+// addToPrint('p01');
+
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
@@ -57,18 +66,12 @@ var printPlaylists = function () {
   var playlist = library.playlists;
   var output = [];
 
-  // attempt to refactor and get addToPrint to work...
-  // for (var items in playlist) {
-  //   addToPrint(playlist[items]);
-  // }
   for (var items in playlist) {
-    output.push(playlist[items].id + ": "
-      + playlist[items].name + " - "
-      + playlist[items].tracks.length +  " tracks");
+    output.push(addToPrint(playlist[items]));
   }
 
   output.forEach(function(key, i) {
-    console.log(output[i]);
+    console.log(output[i].toString());
   });
 }
 
@@ -83,16 +86,14 @@ var printTracks = function () {
   var output = [];
 
   for (var items in trackList) {
-    output.push(trackList[items].id + ": "
-      + trackList[items].name + " by "
-      + trackList[items].artist
-      + " (" + trackList[items].album + ")");
+    output.push(addToPrint(trackList[items]));
   }
 
   output.forEach(function(key, i) {
-    console.log(output[i]);
+    console.log(output[i].toString());
   });
 }
+printTracks();
 
 // prints a list of tracks for a given playlist, in the form:
 // p01: Coding Music - 2 tracks
@@ -100,14 +101,16 @@ var printTracks = function () {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
 var printPlaylist = function (playlistId) {
-  var trackList = library.playlists[playlistId].tracks;
+  var tracks = library.playlists[playlistId].tracks;
   var output = [];
-//  console.log(trackList);
+  // console.log(tracks);
 
 
 }
 
-printPlaylist('p01');
+// printPlaylist('p01');
+
+
 // adds an existing track to an existing playlist
 
 var addTrackToPlaylist = function (trackId, playlistId) {
