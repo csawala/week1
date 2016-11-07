@@ -115,13 +115,13 @@ var uid = function() {
 }
 
 
-// adds a track to the library
+// finds and returns next available Id
 
-var addTrack = function (name, artist, album) {
+function nextId(list) {
   var listId = [];
   var newId = "";
-  // finds next available _tXX_ number
-  for (var id in library.tracks){
+  // finds next available _XX number
+  for (var id in list){
     listId.push(id);
   }
 
@@ -132,7 +132,15 @@ var addTrack = function (name, artist, album) {
     }
   });
 
-  // create new track using next available track number
+  return newId;
+}
+
+
+// adds a track to the library
+
+var addTrack = function (name, artist, album) {
+  newId = nextId(library.tracks);
+
   library.tracks[newId] = {
     id: newId,
     name: name,
@@ -142,10 +150,17 @@ var addTrack = function (name, artist, album) {
 }
 addTrack("Motherlover", "The Lonely Island", "Turtleneck & Chain");
 
+
 // adds a playlist to the library
 
 var addPlaylist = function (name) {
+  newId = nextId(library.playlists);
 
+  library.playlists[newId] = {
+    id: newId,
+    name: name,
+    tracks: []
+  }
 }
 
 
