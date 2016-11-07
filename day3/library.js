@@ -23,12 +23,12 @@ var library = {
              }
 }
 
-// FUNCTIONS TO IMPLEMENT:
-// to Refactor later to reduce code...
-// consider taking parameters for tracks vs. playlists
+// Custom function to build output based on whether
+// a track or playlist is being pushed through
 function addToPrint (key, content) {
   var output = [];
 
+  // checks id to determine whether to format output as track or playlist
   if (key.id.includes('t')){
     output.push(key.id + ": "
       + key.name + " by "
@@ -43,7 +43,7 @@ function addToPrint (key, content) {
 
   return output;
 }
-// addToPrint('p01');
+
 
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
@@ -102,7 +102,8 @@ var printPlaylist = function (playlistId) {
 // adds an existing track to an existing playlist
 
 var addTrackToPlaylist = function (trackId, playlistId) {
-
+  library.playlists[playlistId].tracks.push(trackId);
+  library.playlists[playlistId].tracks.sort();
 }
 
 
@@ -117,9 +118,29 @@ var uid = function() {
 // adds a track to the library
 
 var addTrack = function (name, artist, album) {
+  var listId = [];
+  var newId = "";
+  // finds next available _tXX_ number
+  for (var id in library.tracks){
+    listId.push(id);
+  }
 
+  listId.forEach(function(key,i){
+    if(!listId[i + 1]) {
+      newId = listId[i];
+      newId = newId.slice(0,-1) + (i + 2);
+    }
+  });
+
+  // create new track using next available track number
+  library.tracks[newId] = {
+    id: newId,
+    name: name,
+    artist: artist,
+    album: album
+  }
 }
-
+addTrack("Motherlover", "The Lonely Island", "Turtleneck & Chain");
 
 // adds a playlist to the library
 
